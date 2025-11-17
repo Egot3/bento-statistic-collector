@@ -48,13 +48,14 @@ export function createCard(e, userLogger) {
           const indicatorHolder = document.getElementsByClassName(
             "carousel-indicators"
           )[0];
+          // const indicatorHolder = document.getElementById("carouselExampleIndicators")
 
           const newIndicator = document.createElement("button");
           newIndicator.setAttribute("type", "button");
           newIndicator.setAttribute(
             "data-bs-target",
             "#carouselExampleIndicators"
-          ); 
+          );
           newIndicator.setAttribute(
             "data-bs-slide-to",
             cardIteration.toString()
@@ -63,7 +64,9 @@ export function createCard(e, userLogger) {
 
           indicatorHolder.appendChild(newIndicator);
 
-          const myCarousel = new bootstrap.Carousel(document.getElementById('carouselExampleIndicators'));
+          const myCarousel = new bootstrap.Carousel(
+            document.getElementById("carouselExampleIndicators")
+          );
         }
 
         const cardHolder = document.getElementsByName(
@@ -75,7 +78,7 @@ export function createCard(e, userLogger) {
         );
 
         const card = `
-        <div class="card col-4 p-3" name="card">
+        <div class="card col-4 p-3" name="card" style="overflow:visible">
           <div class="card-body">
             <a href='${githubInfo.data.git_url}'>${owner}/${name}</a>
             <span>Звёзд: ${githubInfo.data.stargazers_count}</span>
@@ -89,11 +92,32 @@ export function createCard(e, userLogger) {
             <p class="card-text">
               Обновлен: ${githubInfo.data.updated_at}
             </p>
-          </div>
+          
+          <div class="dropdown container">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Colour
+  </button>
+  <ul class="dropdown-menu" style='z-index:16;'>
+    <li><a class="dropdown-color" href="#">blue</a></li>
+    <li><a class="dropdown-color" href="#">indigo</a></li>
+    <li><a class="dropdown-color" href="#">purple</a></li>
+    <li><a class="dropdown-color" href="#">pink</a></li>
+    <li><a class="dropdown-color" href="#">red</a></li>
+    <li><a class="dropdown-color" href="#">orange</a></li>
+    <li><a class="dropdown-color" href="#">yellow</a></li>
+    <li><a class="dropdown-color" href="#">green</a></li>
+    <li><a class="dropdown-color" href="#">teal</a></li>
+    <li><a class="dropdown-color" href="#">cyan</a></li>
+    <li><a class="dropdown-color" href="#">gray</a></li>
+  </ul>
+        
+        </div>
         </div>
           `;
 
         cardHolder.innerHTML += card;
+        const colorOption = document.getElementsByClassName('dropdown-color')
+        
       })
       .catch((err) => {
         console.log(err);
