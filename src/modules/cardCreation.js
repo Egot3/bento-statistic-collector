@@ -93,22 +93,22 @@ export function createCard(e, userLogger) {
               Обновлен: ${githubInfo.data.updated_at}
             </p>
           
-          <div class="dropdown container">
+          <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Colour
+    Color
   </button>
   <ul class="dropdown-menu" style='z-index:16;'>
-    <li><a class="dropdown-color" href="#">blue</a></li>
-    <li><a class="dropdown-color" href="#">indigo</a></li>
-    <li><a class="dropdown-color" href="#">purple</a></li>
-    <li><a class="dropdown-color" href="#">pink</a></li>
-    <li><a class="dropdown-color" href="#">red</a></li>
-    <li><a class="dropdown-color" href="#">orange</a></li>
-    <li><a class="dropdown-color" href="#">yellow</a></li>
-    <li><a class="dropdown-color" href="#">green</a></li>
-    <li><a class="dropdown-color" href="#">teal</a></li>
-    <li><a class="dropdown-color" href="#">cyan</a></li>
-    <li><a class="dropdown-color" href="#">gray</a></li>
+    <li><a class="dropdown-item" role="button" href="#">blue    </a></li>
+    <li><a class="dropdown-item" role="button" href="#">indigo  </a></li>
+    <li><a class="dropdown-item" role="button" href="#">purple  </a></li>
+    <li><a class="dropdown-item" role="button" href="#">pink    </a></li>
+    <li><a class="dropdown-item" role="button" href="#">red     </a></li>
+    <li><a class="dropdown-item" role="button" href="#">orange  </a></li>
+    <li><a class="dropdown-item" role="button" href="#">yellow  </a></li>
+    <li><a class="dropdown-item" role="button" href="#">green   </a></li>
+    <li><a class="dropdown-item" role="button" href="#">teal    </a></li>
+    <li><a class="dropdown-item" role="button" href="#">cyan    </a></li>
+    <li><a class="dropdown-item" role="button" href="#">gray    </a></li>
   </ul>
         
         </div>
@@ -116,8 +116,10 @@ export function createCard(e, userLogger) {
           `;
 
         cardHolder.innerHTML += card;
-        const colorOption = document.getElementsByClassName('dropdown-color')
-        
+        const colorOption = document.getElementsByClassName('dropdown-item');
+Array.from(colorOption).forEach(element => {
+  element.addEventListener('click', (event) => console.log(element.textContent.trim()));
+});
       })
       .catch((err) => {
         console.log(err);
