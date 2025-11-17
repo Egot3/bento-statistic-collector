@@ -1,12 +1,16 @@
 import "../style.css";
 import axios from "axios";
+import { changeChartBg } from "./chartUtils/chartChangeColor";
+import { chartAddData } from "./chartUtils/chartAddData";
+import { myChart } from "./chartUtils/chartAddData";
 
 const findGit = document.getElementsByName("findGit")[0];
 const githubRe = /^^([a-z0-9A-Z.-]+)\/([a-z0-9A-Z.-]+)$/;
 let cardAmount = document.getElementsByName("card");
+let cardSlideIteration = 0;
 let cardIteration = 0;
 
-export function createCard(e, userLogger) {
+export const createCard = (e, userLogger) => {
   userLogger.innerText = "";
   const gitString = e.target.childNodes[1].childNodes[3].value.split(" ");
   const regexCheckArr = new Map(
@@ -30,9 +34,10 @@ export function createCard(e, userLogger) {
       .then((githubInfo) => {
         console.log(githubInfo);
         cardAmount = document.getElementsByName("card").length;
+        cardIteration++
 
         if (cardAmount % 3 === 0 && cardAmount != 0) {
-          cardIteration++;
+          cardSlideIteration++;
           const carouselHolder =
             document.getElementsByClassName("carousel-inner")[0];
           console.log(carouselHolder);
@@ -40,7 +45,7 @@ export function createCard(e, userLogger) {
           carouselItemNew.className += "carousel-item container-fluid";
           const cardHolderNew = document.createElement("div");
           cardHolderNew.className += "row";
-          cardHolderNew.setAttribute("name", `cardHolder-${cardIteration}`);
+          cardHolderNew.setAttribute("name", `cardHolder-${cardSlideIteration}`);
           carouselHolder.appendChild(carouselItemNew);
           carouselItemNew.appendChild(cardHolderNew);
           console.log(carouselHolder);
@@ -58,9 +63,9 @@ export function createCard(e, userLogger) {
           );
           newIndicator.setAttribute(
             "data-bs-slide-to",
-            cardIteration.toString()
+            cardSlideIteration.toString()
           );
-          newIndicator.setAttribute("aria-label", `Slide ${cardIteration + 1}`);
+          newIndicator.setAttribute("aria-label", `Slide ${cardSlideIteration + 1}`);
 
           indicatorHolder.appendChild(newIndicator);
 
@@ -70,15 +75,15 @@ export function createCard(e, userLogger) {
         }
 
         const cardHolder = document.getElementsByName(
-          `cardHolder-${cardIteration}`
+          `cardHolder-${cardSlideIteration}`
         )[0];
         console.log(
-          cardIteration,
-          document.getElementsByName(`cardHolder-${cardIteration}`)[0]
+          cardSlideIteration,
+          document.getElementsByName(`cardHolder-${cardSlideIteration}`)[0]
         );
 
         const card = `
-        <div class="card col-4 p-3" name="card" style="overflow:visible">
+        <div class="card col-4 p-3" name="card" id="card-${cardIteration}" style="overflow:visible">
           <div class="card-body">
             <a href='${githubInfo.data.git_url}'>${owner}/${name}</a>
             <span>Звёзд: ${githubInfo.data.stargazers_count}</span>
@@ -97,7 +102,7 @@ export function createCard(e, userLogger) {
   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     Color
   </button>
-  <ul class="dropdown-menu" style='z-index:16;'>
+  <ul class="dropdown-menu" >
     <li><a class="dropdown-item" role="button" href="#">blue    </a></li>
     <li><a class="dropdown-item" role="button" href="#">indigo  </a></li>
     <li><a class="dropdown-item" role="button" href="#">purple  </a></li>
@@ -110,15 +115,25 @@ export function createCard(e, userLogger) {
     <li><a class="dropdown-item" role="button" href="#">cyan    </a></li>
     <li><a class="dropdown-item" role="button" href="#">gray    </a></li>
   </ul>
-        
+        <input type="number" min="100" step="100" max="900" name="color-${cardIteration}" value="100"/>
         </div>
+        
         </div>
           `;
 
+        chartAddData(name, githubInfo.data.stargazers_count)
+        // console.log(cardIteration)
+
         cardHolder.innerHTML += card;
         const colorOption = document.getElementsByClassName('dropdown-item');
-Array.from(colorOption).forEach(element => {
-  element.addEventListener('click', (event) => console.log(element.textContent.trim()));
+        Array.from(colorOption).forEach(element => {
+        element.addEventListener('click', (event) => {
+          let cardId = /card-(\d+)/.exec(element.parentElement.parentElement.parentElement.parentElement.parentElement.id)[1]
+          console.log(document.getElementsByName(`color-${cardId}`)[0])
+
+          changeChartBg(cardId, element.textContent, document.getElementsByName(`color-${cardId}`)[0].value, myChart)
+
+        });
 });
       })
       .catch((err) => {
