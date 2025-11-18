@@ -1,4 +1,8 @@
 export function bootstrapColorConverter(color){
-    console.log(getComputedStyle(document.documentElement))
-    return getComputedStyle(document.documentElement).getPropertyValue(color.trim())
+    // console.log(getComputedStyle(document.documentElement))
+    const colorReg = /[$](\w+)-(\d+)/.exec(color)
+    console.log(document.documentElement.style.getPropertyValue(colorReg))
+    const colorUsable = `--bs-${colorReg[1]}-${colorReg[2]}`
+    console.log(colorUsable)
+    return getComputedStyle(document.documentElement).getPropertyValue(colorUsable.trim())
 }

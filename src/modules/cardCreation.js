@@ -103,17 +103,17 @@ export const createCard = (e, userLogger) => {
     Color
   </button>
   <ul class="dropdown-menu" >
-    <li><a class="dropdown-item" role="button" href="#">blue    </a></li>
-    <li><a class="dropdown-item" role="button" href="#">indigo  </a></li>
-    <li><a class="dropdown-item" role="button" href="#">purple  </a></li>
-    <li><a class="dropdown-item" role="button" href="#">pink    </a></li>
-    <li><a class="dropdown-item" role="button" href="#">red     </a></li>
-    <li><a class="dropdown-item" role="button" href="#">orange  </a></li>
-    <li><a class="dropdown-item" role="button" href="#">yellow  </a></li>
-    <li><a class="dropdown-item" role="button" href="#">green   </a></li>
-    <li><a class="dropdown-item" role="button" href="#">teal    </a></li>
-    <li><a class="dropdown-item" role="button" href="#">cyan    </a></li>
-    <li><a class="dropdown-item" role="button" href="#">gray    </a></li>
+    <li><a class="dropdown-item" role="button" href="#">blue</a></li>
+    <li><a class="dropdown-item" role="button" href="#">indigo</a></li>
+    <li><a class="dropdown-item" role="button" href="#">purple</a></li>
+    <li><a class="dropdown-item" role="button" href="#">pink</a></li>
+    <li><a class="dropdown-item" role="button" href="#">red</a></li>
+    <li><a class="dropdown-item" role="button" href="#">orange</a></li>
+    <li><a class="dropdown-item" role="button" href="#">yellow</a></li>
+    <li><a class="dropdown-item" role="button" href="#">green</a></li>
+    <li><a class="dropdown-item" role="button" href="#">teal</a></li>
+    <li><a class="dropdown-item" role="button" href="#">cyan</a></li>
+    <li><a class="dropdown-item" role="button" href="#">gray</a></li>
   </ul>
         <input type="number" min="100" step="100" max="900" name="color-${cardIteration}" value="100"/>
         </div>
