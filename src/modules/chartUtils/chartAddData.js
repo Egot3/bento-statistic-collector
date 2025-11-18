@@ -1,4 +1,6 @@
 import { Chart } from "chart.js/auto"
+import { bootstrapColorConverter } from "../bootsrapUtils/bootstrapColorConverter"
+
 
 const graph = document.getElementById("graph")
 export let bg = []
@@ -23,7 +25,7 @@ export const myChart = new Chart(
 
 
 export const chartAddData = (label, newData) => {
-    bg.push(`$yellow-500`)
+    bg.push(bootstrapColorConverter(`$yellow`))
     myChart.data.datasets[0].backgroundColor = bg;
     myChart.data.labels.push(label);
     myChart.data.datasets[0].data.push(newData);

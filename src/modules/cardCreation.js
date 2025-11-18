@@ -83,7 +83,7 @@ export const createCard = (e, userLogger) => {
         );
 
         const card = `
-        <div class="card col-4 p-3" name="card" id="card-${cardIteration}" style="overflow:visible">
+        <div class="card col-4 p-3 h-100" name="card" id="card-${cardIteration}">
           <div class="card-body">
             <a href='${githubInfo.data.git_url}'>${owner}/${name}</a>
             <span>Звёзд: ${githubInfo.data.stargazers_count}</span>
@@ -115,11 +115,10 @@ export const createCard = (e, userLogger) => {
     <li><a class="dropdown-item" role="button" href="#">cyan</a></li>
     <li><a class="dropdown-item" role="button" href="#">gray</a></li>
   </ul>
-        <input type="number" min="100" step="100" max="900" name="color-${cardIteration}" value="100"/>
         </div>
         
         </div>
-          `;
+          `; //if it would have been a react https://youtu.be/-ChMzPgyvTc?si=x0EiEn0Xy-Uedhvz
 
         chartAddData(name, githubInfo.data.stargazers_count)
         // console.log(cardIteration)
@@ -131,7 +130,7 @@ export const createCard = (e, userLogger) => {
           let cardId = /card-(\d+)/.exec(element.parentElement.parentElement.parentElement.parentElement.parentElement.id)[1]
           console.log(document.getElementsByName(`color-${cardId}`)[0])
 
-          changeChartBg(cardId, element.textContent, document.getElementsByName(`color-${cardId}`)[0].value, myChart)
+          changeChartBg(cardId, element.textContent, myChart)
 
         });
 });
